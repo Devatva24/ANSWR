@@ -1,112 +1,143 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # ANSWR
 
-**AI-powered Google Forms solver — minimal, fast, private.**
+**Solve any Google Form in seconds — powered by Groq AI.**
 
-Built with Groq API · Chrome Extension · Manifest V3
+[![Manifest V3](https://img.shields.io/badge/Manifest-V3-blue?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Powered by Groq](https://img.shields.io/badge/AI-Groq-orange?style=flat-square)](https://groq.com)
+
+</div>
 
 ---
 
-</div>
+## Overview
+
+ANSWR is a lightweight Chrome extension that injects a floating panel into any Google Form, scrapes the questions, and returns AI-generated answers — instantly, without ever leaving the page.
+
+No trackers. No servers. Just you, your API key, and blazing-fast Groq inference.
+
+---
 
 ## Screenshots
 
 <div align="center">
-<table>
-<tr>
-<td align="center"><strong>Extension Popup</strong></td>
-<td align="center"><strong>Solver Panel</strong></td>
-</tr>
-<tr>
-<td><img src="screenshots/popup.png" alt="Extension Popup" width="360"/></td>
-<td><img src="screenshots/panel.png" alt="Solver Panel" width="360"/></td>
-</tr>
-</table>
+
+| Extension Popup | Solver Panel |
+|:-:|:-:|
+| <img src="screenshots/popup.png" alt="Extension Popup" width="340"/> | <img src="screenshots/panel.png" alt="Solver Panel" width="340"/> |
+
 </div>
 
 ---
 
-## What It Does
+## Features
 
-ANSWR injects a sleek floating panel into any Google Form. It scrapes the questions, sends them to the Groq API, and displays the answers — all without leaving the page.
+- **Instant answers** — scrapes MCQ and multi-select questions and solves them in one click
+- **Fast inference** — powered by Groq's ultra-low-latency LLM API
+- **Sleek UI** — dark glassmorphism panel that overlays cleanly on any form
+- **Fully local** — your API key is stored on-device and only ever sent to Groq
+- **Zero dependencies** — pure vanilla JS, no build step required
 
-- Scrapes MCQ and multi-select questions from Google Forms
-- Uses Groq's blazing-fast LLM inference for answers
-- Displays results in a premium dark-glass panel
-- Everything runs locally — your API key never leaves your machine (except to Groq)
+---
 
 ## Installation
 
-1. Clone or download this repository
-2. Open `chrome://extensions/` in Google Chrome
-3. Enable **Developer mode** (top right toggle)
-4. Click **Load unpacked** and select the `formsolver-fixed` folder
-5. Click the extension icon and enter your [Groq API key](https://console.groq.com/keys)
+> Requires Google Chrome with Developer Mode enabled.
+
+1. **Clone or download** this repository
+2. Go to `chrome://extensions/` in Chrome
+3. Toggle on **Developer mode** (top-right corner)
+4. Click **Load unpacked** and select the `formsolver-fixed/` folder
+5. Click the ANSWR icon in your toolbar and paste your [Groq API key](https://console.groq.com/keys)
+
+---
 
 ## Usage
+
+Navigate to any Google Form, then:
 
 | Shortcut | Action |
 |----------|--------|
 | `Alt + P` | Open / close the solver panel |
 | `Alt + S` | Solve the form instantly |
 
-You can also click the floating **FS** button at the bottom-right of any Google Form page.
+You can also use the floating **FS** trigger button that appears at the bottom-right of every Google Form page.
 
 ### Quick Start
 
-1. Navigate to a Google Form
-2. Press `Alt + P` to open the panel
-3. Press `Alt + S` or click **Solve Form**
-4. View answers directly in the panel
+```
+1. Open a Google Form
+2. Press Alt + P  →  panel opens
+3. Press Alt + S  →  answers appear
+```
+
+---
 
 ## Supported Models
 
-| Model | Speed | Quality |
-|-------|-------|---------|
-| Llama 3.3 70B | Moderate | Best |
-| Llama 3.1 8B | Fast | Good |
-| Mixtral 8x7B | Moderate | Good |
+| Model | Speed | Quality | Best For |
+|-------|-------|---------|----------|
+| Llama 3.3 70B | ⚡⚡ | ★★★ | Accuracy-critical forms |
+| Llama 3.1 8B | ⚡⚡⚡ | ★★☆ | Fast, everyday use |
+| Mixtral 8x7B | ⚡⚡ | ★★☆ | Balanced performance |
 
-Select your preferred model in the extension popup or panel settings.
+Switch models anytime from the popup or the panel's settings menu.
 
-## Tech Stack
-
-- **Platform**: Chrome Extension (Manifest V3)
-- **AI Backend**: [Groq API](https://groq.com)
-- **Font**: [Manrope](https://fonts.google.com/specimen/Manrope)
-- **Styling**: Custom CSS with glassmorphism
-- **JS**: Vanilla — zero dependencies
+---
 
 ## Project Structure
 
 ```
 formsolver-fixed/
-├── manifest.json      # Extension manifest (MV3)
-├── content.js         # Core logic — scraping, API calls, panel UI
-├── content.css        # Panel and trigger styling
-├── popup.html         # Extension popup — settings & status
-├── popup.js           # Popup logic — save config, detect forms
-├── icons/             # Extension icons (16, 48, 128)
-├── screenshots/       # Screenshots for README
-│   ├── popup.png
-│   └── panel.png
-└── README.md
+├── manifest.json       # Extension manifest (MV3)
+├── content.js          # Core logic — scraping, API calls, panel UI
+├── content.css         # Panel and trigger button styling
+├── popup.html          # Extension popup — settings & status
+├── popup.js            # Popup logic — save config, detect forms
+├── icons/              # Extension icons (16px, 48px, 128px)
+└── screenshots/
+    ├── popup.png
+    └── panel.png
 ```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Platform | Chrome Extension (Manifest V3) |
+| AI Backend | [Groq API](https://groq.com) |
+| Language | Vanilla JavaScript (zero dependencies) |
+| Styling | Custom CSS — glassmorphism design |
+| Font | [Manrope](https://fonts.google.com/specimen/Manrope) via Google Fonts |
+
+---
 
 ## Privacy
 
-- Your Groq API key is stored in `chrome.storage.local` and **never** transmitted anywhere except directly to the Groq API
-- No analytics, no telemetry, no tracking
-- The extension only activates on `docs.google.com/forms/*`
+ANSWR is designed with privacy as a default, not an afterthought.
+
+- Your Groq API key is saved to `chrome.storage.local` and **never** sent anywhere except directly to the Groq API
+- No analytics, no telemetry, no third-party requests
+- The extension only activates on `docs.google.com/forms/*` — it has no access to any other pages
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
+
+---
 
 ## License
 
-MIT
+[MIT](LICENSE) — free to use, modify, and distribute.
 
 ---
 
 <div align="center">
-<sub>Built with focus on aesthetics and simplicity.</sub>
+<sub>Built with a focus on aesthetics and simplicity.</sub>
 </div>
-]]>
